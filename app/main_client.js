@@ -1,13 +1,11 @@
+import '../semantic/src/semantic.less';
+import 'semantic-ui/dist/semantic.min.js';
+
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/App.jsx';
 
-Accounts.ui.config({
-  passwordSignupFields: 'USERNAME_ONLY',
-});
-
-console.log('Running on client only');
+import Routes from './client/routes';
 
 Meteor.startup(() => {
-  ReactDOM.render(<App/>, document.getElementById('root'));
+  ReactDOM.render(<Routes />, document.getElementById('root'));
 });

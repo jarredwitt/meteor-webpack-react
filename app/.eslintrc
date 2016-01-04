@@ -1,6 +1,18 @@
 {
+  "parser": "babel-eslint",
+  "ecmaFeatures": {
+      "classes": true,
+      "jsx": true
+  },
   "extends": "eslint-config-airbnb",
   "rules": {
-    "prefer-const": 0
+    "prefer-const": 0,
+    "react/sort-comp": [2, { "order": ["lifecycle", "render", "everything-else"]}]
+  },
+  "plugins": [
+    "react"
+  ],
+  "env": {
+    "meteor": true
   }
 }

@@ -51,11 +51,50 @@ var config = module.exports = _.assign(_.clone(config), {
         loader: 'style!css',
         exclude: /node_modules|lib/,
       },
+      {
+        test: /\.css$/,
+        loader: 'style-loader!css-loader'
+      },
+      {
+        test: /\.less$/,
+        loader: 'style-loader!css-loader!less-loader',
+        exclude: /node_modules|lib/,
+      },
+      {
+        test: /\.png$/,
+        loader: "url?limit=1000000&mimetype=image/png",
+        exclude: /node_modules|lib/,
+      },
+      {
+        test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
+        loader: "url?limit=10000&mimetype=application/font-woff"
+      },
+      {
+        test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
+        loader: "url?limit=10000&mimetype=application/font-woff"
+      },
+      {
+        test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
+        loader: "url?limit=10000&mimetype=application/octet-stream"
+      },
+      {
+        test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
+        loader: "file"
+      },
+      {
+        test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+        loader: "url?limit=10000&mimetype=image/svg+xml"
+      }
     ],
   },
   plugins: (config.plugins || []).concat([
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
+    new webpack.DefinePlugin({
+      "process.env": {
+        NODE_ENV: JSON.stringify("dev")
+      }
+    })
   ]),
   devServer: {
     publicPath: devProps.baseUrl + '/assets/',

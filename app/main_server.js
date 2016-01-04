@@ -1,22 +1,14 @@
 import React from 'react';
-import App from './components/App.jsx';
-import {Posts} from './collections';
-import {createPosts, createUsers} from './fixtures';
-// we don't call this so we're just importing to initialize file
-import './method_example';
+import ReactDomServer from 'react-dom/server';
+import App from './client/containers/App.jsx';
 
-// these will only run on the sever since we only 'import' them in main_server.js
+// All publications are included!
+let publicationsContext = require.context('./publications', true, /.+\.js$/);
+publicationsContext.keys().forEach(publicationsContext);
 
-if (!Posts.find().fetch().length) {
-  createPosts();
-  createUsers();
-}
-
-// smoke test that these are present
-Npm.require;
-Assets;
-require('fs').readFile.call;
+// All methods are included!
+let methodsContext = require.context('./methods', true, /.+\.js$/);
+methodsContext.keys().forEach(methodsContext);
 
 console.log('\n\nRunning on server only');
-console.log('There are # posts:', Posts.find().fetch().length);
-console.log('React SSR:', React.renderToString(<App/>));
+console.log('React SSR:', ReactDomServer.renderToString(<App />));
